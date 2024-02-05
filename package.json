@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@symfony/webpack-encore": "^4.5.0",
+    "@tweenjs/tween.js": "^23.1.1",
+    "add": "^2.0.6",
+    "animejs": "^3.2.2",
+    "core-js": "^3.35.0",
+    "ramda": "^0.29.1",
+    "regenerator-runtime": "^0.14.1"
+  },
+  "scripts": {
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.23.3",
+    "sass": "^1.70.0",
+    "sass-loader": "^13.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "vue": "^2.7.16",
+    "vue-loader": "^15.11.1",
+    "vue-template-compiler": "^2.7.16",
+    "webpack-notifier": "^1.15.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0"
+  }
+}

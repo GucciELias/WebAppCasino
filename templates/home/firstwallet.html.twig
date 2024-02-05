@@ -1,0 +1,32 @@
+{% extends 'home/index.html.twig' %}
+
+
+{% block content %}
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="form-container d-flex justify-content-center">
+        <div class="card col-md-6">
+            <p>VEUILLEZ AJOUTER DU CREDIT SUR VOTRE PORTEFEUILLE</p>
+            <form method="post" class="d-flex flex-column">
+                {% for champ in champs %}
+                    <div>
+                        <label for="{{ champ.id }}" class="form-label">{{ champ.label }}</label>
+                        <input type="{{ champ.type|default('text') }}" id="{{ champ.id }}" name="{{ champ.id }}" class="form-control" value="{{ champ.valeur }}" {{ champ.readonly|default(false) ? 'readonly' : '' }}>
+                    </div>
+                {% endfor %}
+                <div class="mt-3 d-flex justify-content-end"> <!-- Alignement du bouton à droite -->
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

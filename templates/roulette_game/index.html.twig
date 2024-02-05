@@ -1,0 +1,92 @@
+{% extends 'home/index.html.twig' %}
+
+
+
+{% block content %}
+
+    <link rel="stylesheet" href="{{ asset("/assets/css/board2.css") }}">
+    <link rel="stylesheet" href="{{ asset("build/RouletteGame.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("/assets/css/roulette.css") }}">
+{{ encore_entry_script_tags('RouletteGame') }}
+
+    <style>
+
+        #startButton:disabled {
+            opacity: 0.5; /* Rend le bouton semi-transparent */
+            cursor: not-allowed; /* Change le curseur pour indiquer qu'il n'est pas cliquable */
+        }
+    </style>
+
+<body>
+    <div id="app" class="roulette">
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="welcome-heading">Bienvenue à la Roulette</h1>
+                    <p class="roulette-description">La roulette est un jeu de hasard dans lequel un croupier lance une bille dans une roue rotative et les joueurs parient sur le numéro ou la couleur où la bille va atterrir. C'est simple, amusant et passionnant !</p>
+                </div>
+            </div>
+            <div class="roulette-wheel">
+                <div class="layer-2 wheel" style="transform: rotate(0deg);"></div>
+                <div class="layer-3"></div>
+                <div class="layer-4 wheel" style="transform: rotate(0deg);"></div>
+                <div class="layer-5"></div>
+                <div class="ball-container" style="transform: rotate(0deg);">
+                    <div
+                            class="ball"
+                            style="transform: translate(0, -163.221px);"
+                    ></div>
+                </div>
+                <svg width="380" height="380">
+                    <circle
+                            cx="190"
+                            cy="190"
+                            r="190"
+                            style="touch-action: none;"
+                    ></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="result"></div>
+
+    <div class="win"></div>
+
+    <button class="" id="startButton">Lancer la Roulette</button>
+
+
+    <div class="board">
+        <script src="{{ asset('assets/js/board2.js') }}"></script>
+    </div>
+    <button id="validateBetButton">Validate Bets</button>
+
+
+</body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const startButton = document.getElementById('startButton');
+            const validateBetButton = document.getElementById('validateBetButton');
+            const resultContainer = document.querySelector('.win'); // Sélectionnez le conteneur de résultat
+
+            // Désactive le bouton au chargement de la page
+            startButton.disabled = true;
+
+            // Active le bouton startButton lorsque validateBetButton est cliqué
+            validateBetButton.addEventListener('click', function() {
+                startButton.disabled = false;
+            });
+
+            // Désactive startButton après qu'il a été cliqué
+            startButton.addEventListener('click', function() {
+                this.disabled = true;
+            });
+        });
+    </script>
+
+    </html>
+{% endblock %}
+
+

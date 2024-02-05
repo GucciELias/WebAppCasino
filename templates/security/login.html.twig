@@ -1,0 +1,238 @@
+    {% extends 'base.html.twig' %}
+
+    {% block title %}Page de connexion{% endblock %}
+
+    {% block body %}
+
+        <style>
+
+
+
+            .auth-container {
+                display: flex;
+                justify-content: center; /* Centrage horizontal */
+                align-items: center; /* Centrage vertical */
+                height: 80%; /* Utiliser toute la hauteur disponible */
+                z-index: 2; /* S'assure que le conteneur est au-dessus des logos */
+                position: relative; /* Nécessaire pour que z-index fonctionne */
+            }
+
+            body {
+                background-image: url('{{ asset('assets/img/logimg.png') }}'); /* Remplacez par le chemin de votre image */
+                background-size: cover; /* Pour couvrir toute la page */
+                background-position: center; /* Centrer l'image */
+                background-repeat: no-repeat; /* Pour ne pas répéter l'image */
+
+            }
+
+            html, body {
+                height: 100%; /* Assurez-vous que le body occupe toute la hauteur */
+                margin: 0; /* Enlève les marges par défaut */
+            }
+
+            .area{
+                display: flex;
+                width: 100%;
+                height: 100vh; /* Hauteur fixe pour la zone de contenu */
+                justify-content: center; /* Centrage horizontal */
+                align-items: center; /* Centrage vertical */
+            }
+
+
+            .container {
+
+
+                max-width: 500px;
+                background-color: #fff;
+                padding: 2rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.1); /* Ajout de l'ombre */
+                border-radius: 4px;
+
+            }
+
+
+
+            .btn-shine {
+                border: 1px solid;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .btn-shine span {
+                z-index: 20;
+            }
+
+            .btn-shine:after {
+                background: #007bff;
+                content: "";
+                height: 155px;
+                left: -75px;
+                opacity: 0.4;
+                position: absolute;
+                top: -50px;
+                transform: rotate(35deg);
+                transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+                width: 50px;
+                z-index: -10;
+            }
+
+            .btn-shine:hover:after {
+                left: 120%;
+                transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+            }
+
+            .form-control {
+                margin-bottom: 1rem; /* Espacement réduit entre les champs */
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem;
+                padding: 0.5rem; /* Réduction du padding pour diminuer la hauteur */
+                height: 35px;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem; /* Espacement supplémentaire entre les groupes de formulaire */
+            }
+
+            .d-flex {
+                justify-content: space-around; /* Répartit uniformément l'espace autour des éléments */
+                margin-top: 2.5rem; /* Espace supplémentaire avant les boutons */
+            }
+
+            button {
+
+
+                position: relative;
+                padding: 11px 20px; /* Réduction de la taille du bouton */
+
+                text-decoration: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                text-transform: uppercase;
+                background-color: #fff;
+                border: 1px solid rgba(22, 76, 167, 0.6);
+                border-radius: 10px;
+                color: #1d89ff;
+                font-weight: 400;
+                font-family: inherit;
+                z-index: 0;
+                overflow: hidden;
+                transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+            }
+
+            button span {
+                color: #164ca7;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 0.7px;
+            }
+
+            button:hover {
+                animation: rotate624 0.7s ease-in-out both;
+            }
+
+            button:hover span {
+                animation: storm1261 0.7s ease-in-out both;
+                animation-delay: 0.06s;
+            }
+
+            @keyframes rotate624 {
+                0% {
+                    transform: rotate(0deg) translate3d(0, 0, 0);
+                }
+
+                25% {
+                    transform: rotate(3deg) translate3d(0, 0, 0);
+                }
+
+                50% {
+                    transform: rotate(-3deg) translate3d(0, 0, 0);
+                }
+
+                75% {
+                    transform: rotate(1deg) translate3d(0, 0, 0);
+                }
+
+                100% {
+                    transform: rotate(0deg) translate3d(0, 0, 0);
+                }
+            }
+
+
+
+
+
+        </style>
+
+
+        <body>
+
+        <div class="area">
+
+        <div class="auth-container">
+            <div class="container">
+                <form method="post" class="w-100"> <!-- Modifier la largeur du formulaire -->
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a
+                                    href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <h1 id="connexion">Connexion</h1>
+
+                    <div class="form-group">
+                        <label for="inputEmail" class="sr-only"></label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                               autocomplete="email" required autofocus placeholder="Email">
+
+                    <div class="form-group">
+                        <label for="inputPassword" class="sr-only"></label>
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                               autocomplete="current-password" required placeholder="Mot de passe">
+
+                    <div class="d-flex justify-content-between">
+                        <button type="button" id="inscriptionBtn" class="btn-shine"><span>S'inscrire</span></button>
+                        <button id="connexionBtn" class="btn-shine"><span>Se connecter</span></button>
+                    </div>
+
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    {% for flashMessage in app.session.flashbag.get('danger') %}
+                        <div class="alert alert-danger">{{ flashMessage }}</div>
+                    {% endfor %}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        </div >
+
+
+        <script>
+            document.getElementById('inscriptionBtn').addEventListener('click', function() {
+                window.location.href = '{{ path('app_accueil') }}';
+            });
+        </script>
+
+        </body>
+    {% endblock %}
+
+    {% block javascripts %}
+
+
+
+    {% endblock %}

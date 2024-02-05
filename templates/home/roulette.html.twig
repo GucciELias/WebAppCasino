@@ -1,0 +1,46 @@
+{% extends 'home/index.html.twig' %}
+
+{% block content %}
+    <link rel="stylesheet" href="{{ asset("/assets/css/roulette.css") }}">
+
+    <body>
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('app_roulette_game', {'id': 1, 'token': random()}) }}" class="card-link1">
+            <div class="card" style="width: 300px; height: auto; border: 1px solid #ea0303; background-color: #000000; color: white; margin-right: 10px;">
+                <img src="{{ asset('assets/img/roulette1.webp') }}" alt="Roulette 1" class="card-img-top" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">ROULETTE 1</h5>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ path('app_roulette_game', {'id': 2, 'token': random()}) }}" class="card-link mx-auto">
+            <div class="card" style="width: 300px; height: auto; border: 1px solid #ea0303; background-color: #000000; color: white; margin-right: 10px;">
+                <img src="{{ asset('assets/img/roulette1.webp') }}" alt="Roulette 2" class="card-img-top" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">ROULETTE 2</h5>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ path('app_roulette_game', {'id': 3, 'token': random()}) }}" class="card-link3">
+            <div class="card" style="width: 300px; height: auto; border: 1px solid #ea0303; background-color: #000000; color: white; margin-right: 10px;">
+                <img src="{{ asset('assets/img/roulette1.webp') }}" alt="Roulette 3" class="card-img-top" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">ROULETTE 3</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    </body>
+{% endblock %}

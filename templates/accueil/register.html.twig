@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="card w-100" style="max-width: 600px;">
+            <div class="card-header">
+                Formulaire d'Inscription
+            </div>
+            <div class="card-body" style="padding: 2rem;"> <!-- Réduction du padding -->
+                <form action="{{ path('app_accueil_register') }}" method="post" class="px-2 py-3"> <!-- Ajustement du padding du formulaire -->
+                    <div class="row">
+                        {% for champ in champs %}
+                            <div class="col-md-6 mb-2"> <!-- Réduction de la marge -->
+                                <label for="{{ champ.id }}" class="form-label">{{ champ.label }}</label>
+                                <input type="{{ champ.type|default('text') }}" id="{{ champ.id }}" name="{{ champ.id }}" class="form-control" value="{{ champ.valeur }}" {{ champ.readonly|default(false) ? 'readonly' : '' }}>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex justify-content-end mt-3"> <!-- Réduction de la marge -->
+                        <button type="submit" class="btn btn-success" name="valider">S'inscrire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
